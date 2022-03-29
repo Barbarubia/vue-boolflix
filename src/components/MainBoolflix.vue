@@ -1,17 +1,23 @@
 <template>
   <main>
-    Qui inizia il main
-    <h1>{{ stringaTitoloCercato }}</h1>
+    <card-titolo
+      v-for="titolo in arrayTitoli"
+      :key="titolo.it"
+      :titolo-data="titolo"
+    />
   </main>
 </template>
 
 <script>
-import axios from 'axios'
+import CardTitolo from './CardTitolo.vue'
 
 export default {
   name: 'MainBoolflix',
+  components: {
+    CardTitolo
+  },
   props: {
-    stringaTitoloCercato: String
+    arrayTitoli: Array
   }
 }
 </script>

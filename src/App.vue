@@ -1,13 +1,14 @@
 <template>
   <div id="app">
-    <header-boolflix @sendTitolo="setTitoloCercato"/>
-    <main-boolflix :stringa-titolo-cercato="titoloCercato"/>
+    <header-boolflix @sendTitolo="readTitoloCercato"/>
+    <main-boolflix :array-titoli="arrTitoli"/>
   </div>
 </template>
 
 <script>
 import HeaderBoolflix from './components/HeaderBoolflix.vue'
 import MainBoolflix from './components/MainBoolflix.vue'
+import axios from 'axios'
 
 export default {
   name: 'App',
@@ -17,13 +18,23 @@ export default {
   },
   data () {
     return {
-      titoloCercato: ''
+      titoloCercato: '',
+      apiBaseUrl: 'https://api.themoviedb.org/3/',
+      apiKey: 'bc3f3089deff2ed15d9a285827988a57',
+      arrTitoli: []
     }
   },
   methods: {
-    setTitoloCercato (titoloDigitato) {
+    readTitoloCercato (titoloDigitato) {
       this.titoloCercato = titoloDigitato
       // console.log(this.titoloCercato)
+      if (this.titoloCercato.trim() !== '') {
+        axios.get(this.apiBaseUrl + 'search/movie/?api_key=' + this.apiKey + '&query=' + this.titoloCercato)
+          .then(risposta => {
+            this.arrTitoli = risposta.data.results
+            console.log(this.arrTitoli)
+          })
+      }
     }
   }
 }

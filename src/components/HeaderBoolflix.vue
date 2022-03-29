@@ -2,9 +2,9 @@
   <header>
     <nav>
       <label for="search-title">
-        <input type="text" name="search-title" id="search-title" v-model="titoloCercato" placeholder="Digita il titolo...">
+        <input @keyup.enter="$emit('sendTitolo', titoloCercato)" v-model="titoloCercato" type="text" name="search-title" id="search-title" placeholder="Digita il titolo...">
       </label>
-      <button @click="ricercaTitolo">Cerca</button>
+      <button @click="$emit('sendTitolo', titoloCercato)">Cerca</button>
     </nav>
     <hr>
   </header>
@@ -16,12 +16,6 @@ export default {
   data () {
     return {
       titoloCercato: ''
-    }
-  },
-  methods: {
-    ricercaTitolo () {
-      this.$emit('sendTitolo', this.titoloCercato)
-      // console.log(this.titoloCercato)
     }
   }
 }
