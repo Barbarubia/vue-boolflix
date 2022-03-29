@@ -33,12 +33,12 @@ export default {
         axios.get(this.apiBaseUrl + 'search/movie/?api_key=' + this.apiKey + '&query=' + this.titoloCercato)
           .then(risposta => {
             this.arrMovies = risposta.data.results
-            console.log(this.arrMovies)
+            // console.log(this.arrMovies)
           })
         axios.get(this.apiBaseUrl + 'search/tv/?api_key=' + this.apiKey + '&query=' + this.titoloCercato)
           .then(risposta => {
             this.arrSeries = risposta.data.results
-            console.log(this.arrSeries)
+            // console.log(this.arrSeries)
           })
       }
     }
