@@ -23,7 +23,7 @@ export default {
   methods: {
     setTitoloCercato (titoloDigitato) {
       this.titoloCercato = titoloDigitato
-      console.log(this.titoloCercato)
+      // console.log(this.titoloCercato)
     }
   }
 }

@@ -21,7 +21,7 @@ export default {
   methods: {
     ricercaTitolo () {
       this.$emit('sendTitolo', this.titoloCercato)
-      return console.log(this.titoloCercato)
+      // console.log(this.titoloCercato)
     }
   }
 }
