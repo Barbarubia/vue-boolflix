@@ -6,15 +6,12 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'MainBoolflix',
   props: {
     stringaTitoloCercato: String
-  },
-  data () {
-    return {
-
-    }
   }
 }
 </script>
