@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <header-boolflix @sendTitolo="readTitoloCercato"/>
-    <main-boolflix :array-titoli="arrTitoli"/>
+    <main-boolflix :array-movies="arrMovies" :array-series="arrSeries"/>
   </div>
 </template>
 
@@ -21,7 +21,8 @@ export default {
       titoloCercato: '',
       apiBaseUrl: 'https://api.themoviedb.org/3/',
       apiKey: 'bc3f3089deff2ed15d9a285827988a57',
-      arrTitoli: []
+      arrMovies: [],
+      arrSeries: []
     }
   },
   methods: {
@@ -31,8 +32,13 @@ export default {
       if (this.titoloCercato.trim() !== '') {
         axios.get(this.apiBaseUrl + 'search/movie/?api_key=' + this.apiKey + '&query=' + this.titoloCercato)
           .then(risposta => {
-            this.arrTitoli = risposta.data.results
-            console.log(this.arrTitoli)
+            this.arrMovies = risposta.data.results
+            console.log(this.arrMovies)
+          })
+        axios.get(this.apiBaseUrl + 'search/tv/?api_key=' + this.apiKey + '&query=' + this.titoloCercato)
+          .then(risposta => {
+            this.arrSeries = risposta.data.results
+            console.log(this.arrSeries)
           })
       }
     }

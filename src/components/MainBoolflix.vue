@@ -1,23 +1,33 @@
 <template>
   <main>
-    <card-titolo
-      v-for="titolo in arrayTitoli"
-      :key="titolo.it"
-      :titolo-data="titolo"
+    <h1 v-if="arrayMovies.length != 0">Film</h1>
+    <card-movie
+      v-for="movie in arrayMovies"
+      :key="movie.it"
+      :movie-data="movie"
+    />
+    <h1 v-if="arraySeries.length != 0">Serie TV</h1>
+    <card-serie
+      v-for="serie in arraySeries"
+      :key="serie.it"
+      :serie-data="serie"
     />
   </main>
 </template>
 
 <script>
-import CardTitolo from './CardTitolo.vue'
+import CardMovie from './CardMovie.vue'
+import CardSerie from './CardSerie.vue'
 
 export default {
   name: 'MainBoolflix',
   components: {
-    CardTitolo
+    CardMovie,
+    CardSerie
   },
   props: {
-    arrayTitoli: Array
+    arrayMovies: Array,
+    arraySeries: Array
   }
 }
 </script>
