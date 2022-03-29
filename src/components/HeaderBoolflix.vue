@@ -4,7 +4,7 @@
       <label for="search-title">
         <input type="text" name="search-title" id="search-title" placeholder="Digita il titolo...">
       </label>
-      <button>Cerca</button>
+      <button @click="ricercaTitolo">Cerca</button>
     </nav>
     <hr>
   </header>
@@ -12,7 +12,12 @@
 
 <script>
 export default {
-  name: 'HeaderBoolflix'
+  name: 'HeaderBoolflix',
+  methods: {
+    ricercaTitolo () {
+      return console.log('prova bottone')
+    }
+  }
 }
 </script>
 
