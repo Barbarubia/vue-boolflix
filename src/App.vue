@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <header-boolflix />
-    <main-boolflix />
+    <header-boolflix @sendTitolo="setTitoloCercato"/>
+    <main-boolflix :stringa-titolo-cercato="titoloCercato"/>
   </div>
 </template>
 
@@ -14,6 +14,17 @@ export default {
   components: {
     HeaderBoolflix,
     MainBoolflix
+  },
+  data () {
+    return {
+      titoloCercato: ''
+    }
+  },
+  methods: {
+    setTitoloCercato (titoloDigitato) {
+      this.titoloCercato = titoloDigitato
+      console.log(this.titoloCercato)
+    }
   }
 }
 </script>
