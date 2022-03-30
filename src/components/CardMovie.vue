@@ -5,9 +5,9 @@
       <p>Titolo: {{ movieData.title }}</p>
       <p>Titolo Originale: {{ movieData.original_title }}</p>
       <p>Lingua: {{ movieData.original_language }} <img class="img-flag" :src="findFlag()" :alt="movieData.original_language"></p>
-      <p>Voto: {{ ratingStars(movieData.vote_average) }}</p>
-      <font-awesome-icon icon="fa-solid fa-star" />
-      <font-awesome-icon icon="fa-regular fa-star" />
+      <p>Voto: {{ ratingFive(movieData.vote_average) }}</p>
+      <span  v-for="counter in ratingFive(movieData.vote_average)" :key="counter"><font-awesome-icon icon="fa-solid fa-star" /></span>
+      <!-- <span  v-for="counter in (5 - ratingFive(movieData.vote_average))" :key="counter"><font-awesome-icon icon="fa-regular fa-star" /></span> -->
     </li>
   </ul>
 </template>
@@ -26,7 +26,7 @@ export default {
         return require('../assets/img/flags/unknown.png')
       }
     },
-    ratingStars (vote) {
+    ratingFive (vote) {
       return Math.round(vote / 2)
     }
   }

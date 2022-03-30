@@ -5,7 +5,8 @@
       <p>Titolo: {{ serieData.name}}</p>
       <p>Titolo Originale: {{ serieData.original_name}}</p>
       <p>Lingua: {{ serieData.original_language }} <img class="img-flag" :src="findFlag()" :alt="serieData.original_language"></p>
-      <p>Voto: {{ ratingStars(serieData.vote_average) }}</p>
+      <p>Voto: {{ ratingFive(serieData.vote_average) }}</p>
+      <span  v-for="counter in ratingFive(serieData.vote_average)" :key="counter"><font-awesome-icon icon="fa-solid fa-star" /></span>
     </li>
   </ul>
 </template>
@@ -24,7 +25,7 @@ export default {
         return require('../assets/img/flags/unknown.png')
       }
     },
-    ratingStars (vote) {
+    ratingFive (vote) {
       return Math.round(vote / 2)
     }
   }
