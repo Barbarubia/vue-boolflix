@@ -1,18 +1,22 @@
 <template>
   <main>
     <div class="container">
-      <h2 v-if="arrayMovies.length != 0">Film</h2>
-      <card-boolflix
-        v-for="movie in arrayMovies"
-        :key="movie.it"
-        :ricerca-data="movie"
-      />
-      <h2 v-if="arraySeries.length != 0">Serie TV</h2>
-      <card-boolflix
-        v-for="serie in arraySeries"
-        :key="serie.it"
-        :ricerca-data="serie"
-      />
+      <div class="container-movies">
+        <h2 v-if="arrayMovies.length != 0">Film trovati per la ricerca "{{ stringaRicerca }}"</h2>
+        <card-boolflix
+          v-for="movie in arrayMovies"
+          :key="movie.it"
+          :ricerca-data="movie"
+        />
+      </div>
+      <div class="container-series">
+        <h2 v-if="arraySeries.length != 0">Serie TV trovate per la ricerca "{{ stringaRicerca }}"</h2>
+        <card-boolflix
+          v-for="serie in arraySeries"
+          :key="serie.it"
+          :ricerca-data="serie"
+        />
+      </div>
     </div>
   </main>
 </template>
@@ -27,13 +31,18 @@ export default {
   },
   props: {
     arrayMovies: Array,
-    arraySeries: Array
+    arraySeries: Array,
+    stringaRicerca: String
   }
 }
 </script>
 
 <style lang="scss" scoped>
 main {
+  margin-top: 5rem;
+}
+
+.container-series {
   margin-top: 5rem;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <header-boolflix @sendTitolo="readTitoloCercato"/>
-    <main-boolflix :array-movies="arrMovies" :array-series="arrSeries"/>
+    <main-boolflix :array-movies="arrMovies" :array-series="arrSeries" :stringa-ricerca="titoloCercato"/>
   </div>
 </template>
 
@@ -54,5 +54,6 @@ export default {
 
 body {
   background-color: $main-bg;
+  color: white;
 }
 </style>

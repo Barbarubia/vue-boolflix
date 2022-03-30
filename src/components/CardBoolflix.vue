@@ -1,22 +1,21 @@
 <template>
-  <ul>
-    <li class="card-titolo">
-      <div class="poster">
-        <img :src="findPoster()" :alt="ricercaData.title ? ricercaData.title : ricercaData.name">
-        <h4 class="no-poster">{{ ricercaData.title ? ricercaData.title : ricercaData.name }}</h4>
+  <div class="card-titolo">
+    <div class="poster">
+      <img :src="findPoster()" :alt="ricercaData.title ? ricercaData.title : ricercaData.name">
+      <h4 class="no-poster">{{ ricercaData.title ? ricercaData.title : ricercaData.name }}</h4>
 
+    </div>
+    <div class="info-titolo">
+      <h4>{{ ricercaData.title ? ricercaData.title : ricercaData.name }}</h4>
+      <h5>(Original: {{ ricercaData.original_title ? ricercaData.original_title : ricercaData.original_name }})</h5>
+      <img class="img-flag" :src="findFlag()" :alt="ricercaData.original_language">
+      <div class="stars">
+        <span v-if="ratingFive(ricercaData.vote_average) > 0"><font-awesome-icon v-for="counter in ratingFive(ricercaData.vote_average)" :key="counter" icon="fa-solid fa-star" /></span>
+        <span v-if="ratingFive(ricercaData.vote_average) < 5"><font-awesome-icon v-for="counter in (5 - ratingFive(ricercaData.vote_average))" :key="counter" icon="fa-regular fa-star" /></span>
       </div>
-      <div class="info-titolo">
-        <h4>{{ ricercaData.title ? ricercaData.title : ricercaData.name }}</h4>
-        <h5>(Original: {{ ricercaData.original_title ? ricercaData.original_title : ricercaData.original_name }})</h5>
-        <img class="img-flag" :src="findFlag()" :alt="ricercaData.original_language">
-        <div class="stars">
-          <span v-if="ratingFive(ricercaData.vote_average) > 0"><font-awesome-icon v-for="counter in ratingFive(ricercaData.vote_average)" :key="counter" icon="fa-solid fa-star" /></span>
-          <span v-if="ratingFive(ricercaData.vote_average) < 5"><font-awesome-icon v-for="counter in (5 - ratingFive(ricercaData.vote_average))" :key="counter" icon="fa-regular fa-star" /></span>
-        </div>
-      </div>
-    </li>
-  </ul>
+      <p>{{ ricercaData.overview }}</p>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -48,14 +47,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-ul {
-  list-style: none;
-  display: inline-block;
-  margin: 0 .5rem;
-  width: calc(100% / 5 - 1rem);
-}
-
 .card-titolo {
+  width: calc(100% / 5 - 2rem);
+  display: inline-block;
+  margin: 1rem;
   position: relative;
   text-align: center;
   .info-titolo {
@@ -70,6 +65,7 @@ ul {
     display: flex;
     flex-direction: column;
     color: white;
+    overflow-y: auto;
   }
   &:hover {
     .info-titolo {
