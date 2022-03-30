@@ -40,6 +40,9 @@ export default {
             this.arrSeries = risposta.data.results
             // console.log(this.arrSeries)
           })
+      } else {
+        this.arrMovies = []
+        this.arrSeries = []
       }
     }
   }
