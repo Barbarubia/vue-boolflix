@@ -5,7 +5,7 @@
       <p>Titolo: {{ serieData.name}}</p>
       <p>Titolo Originale: {{ serieData.original_name}}</p>
       <p>Lingua: {{ serieData.original_language }} <img class="img-flag" :src="findFlag()" :alt="serieData.original_language"></p>
-      <p>Voto: {{ serieData.vote_average }}</p>
+      <p>Voto: {{ ratingStars(serieData.vote_average) }}</p>
     </li>
   </ul>
 </template>
@@ -23,6 +23,9 @@ export default {
       } else {
         return require('../assets/img/flags/unknown.png')
       }
+    },
+    ratingStars (vote) {
+      return Math.round(vote / 2)
     }
   }
 }

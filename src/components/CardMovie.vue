@@ -5,7 +5,7 @@
       <p>Titolo: {{ movieData.title }}</p>
       <p>Titolo Originale: {{ movieData.original_title }}</p>
       <p>Lingua: {{ movieData.original_language }} <img class="img-flag" :src="findFlag()" :alt="movieData.original_language"></p>
-      <p>Voto: {{ movieData.vote_average }}</p>
+      <p>Voto: {{ ratingStars(movieData.vote_average) }}</p>
     </li>
   </ul>
 </template>
@@ -23,6 +23,9 @@ export default {
       } else {
         return require('../assets/img/flags/unknown.png')
       }
+    },
+    ratingStars (vote) {
+      return Math.round(vote / 2)
     }
   }
 }
