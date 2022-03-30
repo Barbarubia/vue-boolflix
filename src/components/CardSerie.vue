@@ -6,32 +6,8 @@
       <p>Titolo Originale: {{ serieData.original_name}}</p>
       <p>Lingua: {{ serieData.original_language }} <img class="img-flag" :src="findFlag()" :alt="serieData.original_language"></p>
       <p>Voto: {{ ratingFive(serieData.vote_average) }}</p>
-      <span v-for="counter in ratingFive(serieData.vote_average)" :key="counter"><font-awesome-icon icon="fa-solid fa-star" /></span>
-      <span v-if="ratingFive(serieData.vote_average) == 0">
-        <font-awesome-icon icon="fa-regular fa-star" />
-        <font-awesome-icon icon="fa-regular fa-star" />
-        <font-awesome-icon icon="fa-regular fa-star" />
-        <font-awesome-icon icon="fa-regular fa-star" />
-        <font-awesome-icon icon="fa-regular fa-star" />
-      </span>
-      <span v-else-if="ratingFive(serieData.vote_average) == 1">
-        <font-awesome-icon icon="fa-regular fa-star" />
-        <font-awesome-icon icon="fa-regular fa-star" />
-        <font-awesome-icon icon="fa-regular fa-star" />
-        <font-awesome-icon icon="fa-regular fa-star" />
-      </span>
-      <span v-else-if="ratingFive(serieData.vote_average) == 2">
-        <font-awesome-icon icon="fa-regular fa-star" />
-        <font-awesome-icon icon="fa-regular fa-star" />
-        <font-awesome-icon icon="fa-regular fa-star" />
-      </span>
-      <span v-else-if="ratingFive(serieData.vote_average) == 3">
-        <font-awesome-icon icon="fa-regular fa-star" />
-        <font-awesome-icon icon="fa-regular fa-star" />
-      </span>
-      <span v-else-if="ratingFive(serieData.vote_average) == 4">
-        <font-awesome-icon icon="fa-regular fa-star" />
-      </span>
+      <span v-if="ratingFive(serieData.vote_average) > 0"><font-awesome-icon v-for="counter in ratingFive(serieData.vote_average)" :key="counter" icon="fa-solid fa-star" /></span>
+      <span v-if="ratingFive(serieData.vote_average) < 5"><font-awesome-icon v-for="counter in (5 - ratingFive(serieData.vote_average))" :key="counter" icon="fa-regular fa-star" /></span>
     </li>
   </ul>
 </template>
