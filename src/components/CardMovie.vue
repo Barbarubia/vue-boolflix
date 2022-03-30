@@ -6,8 +6,32 @@
       <p>Titolo Originale: {{ movieData.original_title }}</p>
       <p>Lingua: {{ movieData.original_language }} <img class="img-flag" :src="findFlag()" :alt="movieData.original_language"></p>
       <p>Voto: {{ ratingFive(movieData.vote_average) }}</p>
-      <span  v-for="counter in ratingFive(movieData.vote_average)" :key="counter"><font-awesome-icon icon="fa-solid fa-star" /></span>
-      <!-- <span  v-for="counter in (5 - ratingFive(movieData.vote_average))" :key="counter"><font-awesome-icon icon="fa-regular fa-star" /></span> -->
+      <span v-for="counter in ratingFive(movieData.vote_average)" :key="counter"><font-awesome-icon icon="fa-solid fa-star" /></span>
+      <span v-if="ratingFive(movieData.vote_average) == 0">
+        <font-awesome-icon icon="fa-regular fa-star" />
+        <font-awesome-icon icon="fa-regular fa-star" />
+        <font-awesome-icon icon="fa-regular fa-star" />
+        <font-awesome-icon icon="fa-regular fa-star" />
+        <font-awesome-icon icon="fa-regular fa-star" />
+      </span>
+      <span v-else-if="ratingFive(movieData.vote_average) == 1">
+        <font-awesome-icon icon="fa-regular fa-star" />
+        <font-awesome-icon icon="fa-regular fa-star" />
+        <font-awesome-icon icon="fa-regular fa-star" />
+        <font-awesome-icon icon="fa-regular fa-star" />
+      </span>
+      <span v-else-if="ratingFive(movieData.vote_average) == 2">
+        <font-awesome-icon icon="fa-regular fa-star" />
+        <font-awesome-icon icon="fa-regular fa-star" />
+        <font-awesome-icon icon="fa-regular fa-star" />
+      </span>
+      <span v-else-if="ratingFive(movieData.vote_average) == 3">
+        <font-awesome-icon icon="fa-regular fa-star" />
+        <font-awesome-icon icon="fa-regular fa-star" />
+      </span>
+      <span v-else-if="ratingFive(movieData.vote_average) == 4">
+        <font-awesome-icon icon="fa-regular fa-star" />
+      </span>
     </li>
   </ul>
 </template>
