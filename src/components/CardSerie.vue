@@ -1,9 +1,10 @@
 <template>
   <ul>
     <li>
+      <img v-if="serieData.poster_path" :src="'https://image.tmdb.org/t/p/w342' + serieData.poster_path" :alt="serieData.name">
       <p>Titolo: {{ serieData.name}}</p>
       <p>Titolo Originale: {{ serieData.original_name}}</p>
-      <p>Lingua: {{ serieData.original_language }} <img :src="findFlag()" :alt="serieData.original_language"></p>
+      <p>Lingua: {{ serieData.original_language }} <img class="img-flag" :src="findFlag()" :alt="serieData.original_language"></p>
       <p>Voto: {{ serieData.vote_average }}</p>
     </li>
   </ul>
@@ -28,7 +29,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-img {
+.img-flag {
   height: 1rem;
 }
 </style>
