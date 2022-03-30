@@ -1,17 +1,19 @@
 <template>
   <main>
-    <h1 v-if="arrayMovies.length != 0">Film</h1>
-    <card-movie
-      v-for="movie in arrayMovies"
-      :key="movie.it"
-      :movie-data="movie"
-    />
-    <h1 v-if="arraySeries.length != 0">Serie TV</h1>
-    <card-serie
-      v-for="serie in arraySeries"
-      :key="serie.it"
-      :serie-data="serie"
-    />
+    <div class="container">
+      <h2 v-if="arrayMovies.length != 0">Film</h2>
+      <card-movie
+        v-for="movie in arrayMovies"
+        :key="movie.it"
+        :movie-data="movie"
+      />
+      <h2 v-if="arraySeries.length != 0">Serie TV</h2>
+      <card-serie
+        v-for="serie in arraySeries"
+        :key="serie.it"
+        :serie-data="serie"
+      />
+    </div>
   </main>
 </template>
 
@@ -33,5 +35,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+main {
+  margin-top: 5rem;
+}
 </style>
