@@ -6,6 +6,8 @@
       <p>Titolo Originale: {{ movieData.original_title }}</p>
       <p>Lingua: {{ movieData.original_language }} <img class="img-flag" :src="findFlag()" :alt="movieData.original_language"></p>
       <p>Voto: {{ ratingStars(movieData.vote_average) }}</p>
+      <font-awesome-icon icon="fa-solid fa-star" />
+      <font-awesome-icon icon="fa-regular fa-star" />
     </li>
   </ul>
 </template>
