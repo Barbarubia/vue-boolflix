@@ -36,12 +36,9 @@ export default {
           .then(risposta => {
             this.arrMovies = risposta.data.results
             // console.log(this.arrMovies)
-            if (this.arrMovies.length !== 0) {
-              axios.get(this.apiBaseUrl + 'genre/movie/list?api_key=' + this.apiKey)
-                .then(risposta => {
-                  this.arrGenresMovies = risposta.data.genres
-                  // console.log(this.arrGenresMovies)
-                })
+            if (this.arrSeries.length !== 0) {
+              // Generazione array dei generi dei film
+              this.createArrayGenres('movie')
             }
           })
         axios.get(this.apiBaseUrl + 'search/tv/?api_key=' + this.apiKey + '&query=' + this.titoloCercato)
@@ -49,17 +46,24 @@ export default {
             this.arrSeries = risposta.data.results
             // console.log(this.arrSeries)
             if (this.arrSeries.length !== 0) {
-              axios.get(this.apiBaseUrl + 'genre/tv/list?api_key=' + this.apiKey)
-                .then(risposta => {
-                  this.arrGenresSeries = risposta.data.genres
-                  // console.log(this.arrGenresSeries)
-                })
+              // Generazione array dei generi delle serie tv
+              this.createArrayGenres('tv')
             }
           })
       } else {
         this.arrMovies = []
         this.arrSeries = []
       }
+    },
+    createArrayGenres (type) {
+      axios.get(this.apiBaseUrl + `genre/${type}/list?api_key=` + this.apiKey)
+        .then(risposta => {
+          if (type === 'movie') {
+            this.arrGenresMovies = risposta.data.genres
+          } else if (type === 'tv') {
+            this.arrGenresSeries = risposta.data.genres
+          }
+        })
     }
   }
 }
