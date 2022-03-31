@@ -18,6 +18,7 @@
         <span v-if="ratingFive(ricercaData.vote_average) > 0"><font-awesome-icon v-for="counter in ratingFive(ricercaData.vote_average)" :key="counter" icon="fa-solid fa-star" /></span>
         <span v-if="ratingFive(ricercaData.vote_average) < 5"><font-awesome-icon v-for="counter in (5 - ratingFive(ricercaData.vote_average))" :key="counter" icon="fa-regular fa-star" /></span>
       </div>
+      <!-- <p v-if="ricercaData.cast.length > 0">{{ ricercaData.cast[0].name }}</p> -->
       <p>{{ ricercaData.overview }}</p>
     </div>
   </div>

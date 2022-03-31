@@ -24,7 +24,8 @@ export default {
       arrMovies: [],
       arrSeries: [],
       arrGenresMovies: [],
-      arrGenresSeries: []
+      arrGenresSeries: [],
+      arrCast: []
     }
   },
   methods: {
@@ -36,9 +37,27 @@ export default {
           .then(risposta => {
             this.arrMovies = risposta.data.results
             // console.log(this.arrMovies)
-            if (this.arrSeries.length !== 0) {
+            if (this.arrMovies.length !== 0) {
               // Generazione array dei generi dei film
               this.createArrayGenres('movie')
+              // Generazione array dei primi 5 componenti del cast di ogni film
+              this.createArrayCast(this.arrMovies, 'movie')
+              // this.arrMovies.forEach(element => {
+              //   axios.get(this.apiBaseUrl + 'movie/' + element.id + '/credits?api_key=' + this.apiKey)
+              //     .then(risposta => {
+              //       element.cast = []
+              //       if (risposta.data.cast.length > 5) {
+              //         for (let i = 0; i < 5; i++) {
+              //           element.cast.push(risposta.data.cast[i].name)
+              //         }
+              //       } else {
+              //         for (let i = 0; i < risposta.data.cast.length; i++) {
+              //           element.cast.push(risposta.data.cast[i].name)
+              //         }
+              //       }
+              //     })
+              // })
+              console.log(this.arrMovies)
             }
           })
         axios.get(this.apiBaseUrl + 'search/tv/?api_key=' + this.apiKey + '&query=' + this.titoloCercato)
@@ -48,6 +67,9 @@ export default {
             if (this.arrSeries.length !== 0) {
               // Generazione array dei generi delle serie tv
               this.createArrayGenres('tv')
+              // Generazione array dei primi 5 componenti del cast di ogni serie
+              this.createArrayCast(this.arrSeries, 'tv')
+              console.log(this.arrSeries)
             }
           })
       } else {
@@ -64,6 +86,23 @@ export default {
             this.arrGenresSeries = risposta.data.genres
           }
         })
+    },
+    createArrayCast (array, type) {
+      array.forEach(element => {
+        axios.get(this.apiBaseUrl + `${type}/` + element.id + '/credits?api_key=' + this.apiKey)
+          .then(risposta => {
+            element.cast = []
+            if (risposta.data.cast.length > 5) {
+              for (let i = 0; i < 5; i++) {
+                element.cast.push(risposta.data.cast[i].name)
+              }
+            } else {
+              for (let i = 0; i < risposta.data.cast.length; i++) {
+                element.cast.push(risposta.data.cast[i].name)
+              }
+            }
+          })
+      })
     }
   }
 }
