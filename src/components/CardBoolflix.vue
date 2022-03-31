@@ -9,7 +9,7 @@
     <div class="info">
       <h4>{{ ricercaData.title ? ricercaData.title : ricercaData.name }}</h4>
       <h5>(Original: {{ ricercaData.original_title ? ricercaData.original_title : ricercaData.original_name }})</h5>
-      <p v-if="ricercaData.genre_ids.length > 0" class="card-genres">{{ getGenres() }}</p>
+      <p v-if="ricercaData.genre_ids.length > 0" class="card-genres">(<span class="card-genres-list" v-for="element in getGenres()" :key="element">{{ element }}</span>)</p>
       <div class="flag-language">
         <img class="img-flag" :src="findFlag()" :alt="ricercaData.original_language">
         <p v-if="findFlag() === require('../assets/img/flags/unknown.png')">{{ ricercaData.original_language }}</p>
@@ -136,6 +136,9 @@ export default {
       overflow-y: auto;
       .card-genres {
         text-align: center;
+        .card-genres-list:not(:last-of-type)::after {
+          content: ', \00a0';
+        }
       }
       .flag-language {
         position: relative;
