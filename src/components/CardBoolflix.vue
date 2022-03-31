@@ -1,14 +1,18 @@
 <template>
-  <div class="card-titolo">
+  <div class="card">
     <div class="poster">
       <img :src="findPoster()" :alt="ricercaData.title ? ricercaData.title : ricercaData.name">
-      <h4 class="no-poster">{{ ricercaData.title ? ricercaData.title : ricercaData.name }}</h4>
-
+      <font-awesome-icon v-if="findPoster() === require('../assets/img/blank_poster.jpg')" class="no-poster icon-image" icon="fa-regular fa-image" />
+      <font-awesome-icon v-if="findPoster() === require('../assets/img/blank_poster.jpg')" class="no-poster icon-ban" icon="fa-solid fa-ban" />
+      <h4 class="card-titolo">{{ ricercaData.title ? ricercaData.title : ricercaData.name }}</h4>
     </div>
-    <div class="info-titolo">
+    <div class="info">
       <h4>{{ ricercaData.title ? ricercaData.title : ricercaData.name }}</h4>
       <h5>(Original: {{ ricercaData.original_title ? ricercaData.original_title : ricercaData.original_name }})</h5>
-      <img class="img-flag" :src="findFlag()" :alt="ricercaData.original_language">
+      <div class="flag-language">
+        <img class="img-flag" :src="findFlag()" :alt="ricercaData.original_language">
+        <p v-if="findFlag() === require('../assets/img/flags/unknown.png')">{{ ricercaData.original_language }}</p>
+      </div>
       <div class="stars">
         <span v-if="ratingFive(ricercaData.vote_average) > 0"><font-awesome-icon v-for="counter in ratingFive(ricercaData.vote_average)" :key="counter" icon="fa-solid fa-star" /></span>
         <span v-if="ratingFive(ricercaData.vote_average) < 5"><font-awesome-icon v-for="counter in (5 - ratingFive(ricercaData.vote_average))" :key="counter" icon="fa-regular fa-star" /></span>
@@ -47,51 +51,87 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.card-titolo {
+.card {
   width: calc(100% / 5 - 2rem);
   display: inline-block;
   margin: 1rem;
   position: relative;
-  text-align: center;
-  .info-titolo {
-    opacity: 0;
-    background-color: rgba(0, 0, 0, 0.6);
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
+  // text-align: center;
+  //stile per poster visualizzato
+  .poster {
+    position: relative;
     display: flex;
-    flex-direction: column;
-    color: white;
-    overflow-y: auto;
-  }
-  &:hover {
-    .info-titolo {
-      opacity: 1;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .no-poster {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      &.icon-image {
+        color: #757575;
+        font-size: 3.5rem;
+      }
+      &.icon-ban {
+        color: #adadad;
+        font-size: 6rem;
+        opacity: .9;
+      }
+    }
+    .card-titolo {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: .5rem .5rem .5rem 2rem;
+      text-align: right;
+      color: white;
     }
   }
-}
-
-.poster img{
-  width: 100%;
-}
-
-.no-poster {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.8);
-  padding: .5rem 2rem;
-  color: white;
-}
-
-.img-flag {
-  height: 2rem;
-}
-
-.stars {
-  color: yellow;
+  .info {
+    display: none;
+  }
+  //stile per info aggiuntive visualizzate all'hover sul poster
+  &:hover {
+    .card-titolo {
+      display: none;
+    }
+    .info {
+      position: absolute;
+      top: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .3rem;
+      width: 100%;
+      height: 100%;
+      padding: 1rem;
+      background-color: rgba(0, 0, 0, 0.7);
+      text-align: center;
+      color: white;
+      overflow-y: auto;
+      .flag-language {
+        position: relative;
+        height: 1.4rem;
+        .img-flag {
+          height: 100%;
+        }
+        p {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          color: black;
+          text-transform: uppercase;
+        }
+      }
+      .stars {
+        color: yellow;
+      }
+    }
+  }
 }
 </style>
