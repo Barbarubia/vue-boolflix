@@ -9,6 +9,7 @@
     <div class="info">
       <h4>{{ ricercaData.title ? ricercaData.title : ricercaData.name }}</h4>
       <h5>(Original: {{ ricercaData.original_title ? ricercaData.original_title : ricercaData.original_name }})</h5>
+      <p v-if="ricercaData.genre_ids.length > 0" class="card-genres">{{ getGenres() }}</p>
       <div class="flag-language">
         <img class="img-flag" :src="findFlag()" :alt="ricercaData.original_language">
         <p v-if="findFlag() === require('../assets/img/flags/unknown.png')">{{ ricercaData.original_language }}</p>
@@ -26,7 +27,9 @@
 export default {
   name: 'CardBoolflix',
   props: {
-    ricercaData: Object
+    ricercaData: Object,
+    arrayGenresMovies: Array,
+    arrayGenresSeries: Array
   },
   methods: {
     findFlag () {
@@ -45,6 +48,27 @@ export default {
     },
     ratingFive (vote) {
       return Math.ceil(vote / 2)
+    },
+    getGenres () {
+      const genresCard = []
+      if (this.ricercaData.genre_ids.length > 0) {
+        this.ricercaData.genre_ids.forEach(elemento => {
+          if (this.ricercaData.title) {
+            this.arrayGenresMovies.forEach(genre => {
+              if (genre.id === elemento) {
+                genresCard.push(genre.name)
+              }
+            })
+          } else {
+            this.arrayGenresSeries.forEach(genre => {
+              if (genre.id === elemento) {
+                genresCard.push(genre.name)
+              }
+            })
+          }
+        })
+      }
+      return genresCard
     }
   }
 }
@@ -56,29 +80,25 @@ export default {
   display: inline-block;
   margin: 1rem;
   position: relative;
-  // text-align: center;
   //stile per poster visualizzato
   .poster {
     position: relative;
     display: flex;
     img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
     }
     .no-poster {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+      color: #adadad;
       &.icon-image {
-        color: #757575;
-        font-size: 3.5rem;
+        font-size: 3rem;
       }
       &.icon-ban {
-        color: #adadad;
         font-size: 6rem;
-        opacity: .9;
+        opacity: .7;
       }
     }
     .card-titolo {
@@ -86,7 +106,8 @@ export default {
       bottom: 0;
       right: 0;
       background-color: rgba(0, 0, 0, 0.8);
-      padding: .5rem .5rem .5rem 2rem;
+      border-top-left-radius: 1rem;
+      padding: .5rem 1rem;
       text-align: right;
       color: white;
     }
@@ -113,6 +134,9 @@ export default {
       text-align: center;
       color: white;
       overflow-y: auto;
+      .card-genres {
+        text-align: center;
+      }
       .flag-language {
         position: relative;
         height: 1.4rem;
@@ -131,7 +155,23 @@ export default {
       .stars {
         color: yellow;
       }
+      p {
+        text-align: left;
+        font-size: .8rem;
+      }
     }
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .card {
+    width: calc(100% / 3 - 2rem);
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .card {
+    width: calc(100% - 2rem);
   }
 }
 </style>

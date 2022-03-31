@@ -7,6 +7,7 @@
           v-for="movie in arrayMovies"
           :key="movie.it"
           :ricerca-data="movie"
+          :array-genres-movies="arrayGenresMovies"
         />
       </div>
       <div class="container-series">
@@ -15,6 +16,7 @@
           v-for="serie in arraySeries"
           :key="serie.it"
           :ricerca-data="serie"
+          :array-genres-series="arrayGenresSeries"
         />
       </div>
     </div>
@@ -32,6 +34,8 @@ export default {
   props: {
     arrayMovies: Array,
     arraySeries: Array,
+    arrayGenresMovies: Array,
+    arrayGenresSeries: Array,
     stringaRicerca: String
   }
 }

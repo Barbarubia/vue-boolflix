@@ -34,6 +34,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
   .site-title {
     color: $red;
     text-transform: uppercase;
