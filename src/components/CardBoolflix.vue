@@ -18,8 +18,10 @@
         <span v-if="ratingFive(ricercaData.vote_average) > 0"><font-awesome-icon v-for="counter in ratingFive(ricercaData.vote_average)" :key="counter" icon="fa-solid fa-star" /></span>
         <span v-if="ratingFive(ricercaData.vote_average) < 5"><font-awesome-icon v-for="counter in (5 - ratingFive(ricercaData.vote_average))" :key="counter" icon="fa-regular fa-star" /></span>
       </div>
-      <!-- <p v-if="ricercaData.cast.length > 0">{{ ricercaData.cast[0].name }}</p> -->
-      <p>{{ ricercaData.overview }}</p>
+      <p v-if="ricercaData.cast && ricercaData.cast.length > 0" class="card-cast">(Cast: <span class="card-cast-list" v-for="element in ricercaData.cast" :key="element">{{ element }}</span>)</p>
+      <p v-else class="card-cast">(Cast not available)</p>
+      <p v-if="ricercaData.overview !== ''">{{ ricercaData.overview }}</p>
+      <p v-else>Storyline not available for this element.</p>
     </div>
   </div>
 </template>
@@ -158,6 +160,12 @@ export default {
       }
       .stars {
         color: yellow;
+      }
+      .card-cast {
+        text-align: left;
+        .card-cast-list:not(:last-of-type)::after {
+          content: ', \00a0';
+        }
       }
       p {
         text-align: left;
