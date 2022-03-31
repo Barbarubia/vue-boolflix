@@ -2,7 +2,13 @@
   <main>
     <div class="container">
       <div class="container-movies">
-        <h2 v-if="arrayMovies.length != 0">Film trovati per la ricerca "{{ stringaRicerca }}"</h2>
+        <div class="header-ricerca" v-if="arrayMovies.length != 0">
+          <h2>Film trovati per la ricerca "{{ stringaRicerca }}"</h2>
+          <select name="filter-genre-movie" id="filter-genre-movie">
+            <option value="" selected>Select a genre</option>
+            <option v-for="genre in arrayGenresMovies" :key="genre.id" value="genre.name">{{ genre.name }}</option>
+          </select>
+        </div>
         <card-boolflix
           v-for="movie in arrayMovies"
           :key="movie.it"
@@ -11,7 +17,13 @@
         />
       </div>
       <div class="container-series">
-        <h2 v-if="arraySeries.length != 0">Serie TV trovate per la ricerca "{{ stringaRicerca }}"</h2>
+        <div class="header-ricerca" v-if="arraySeries.length != 0">
+          <h2>Serie TV trovate per la ricerca "{{ stringaRicerca }}"</h2>
+          <select name="filter-genre-serie" id="filter-genre-serie">
+            <option value="" selected>Select a genre</option>
+            <option v-for="genre in arrayGenresSeries" :key="genre.id" value="genre.name">{{ genre.name }}</option>
+          </select>
+        </div>
         <card-boolflix
           v-for="serie in arraySeries"
           :key="serie.it"
@@ -44,6 +56,18 @@ export default {
 <style lang="scss" scoped>
 main {
   margin-top: 5rem;
+}
+
+.header-ricerca {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  select {
+    height: 2rem;
+    min-width: 250px;
+    border-radius: .5rem;
+  }
 }
 
 .container-series {
