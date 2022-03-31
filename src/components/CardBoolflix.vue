@@ -44,7 +44,7 @@ export default {
       }
     },
     ratingFive (vote) {
-      return Math.round(vote / 2)
+      return Math.ceil(vote / 2)
     }
   }
 }
